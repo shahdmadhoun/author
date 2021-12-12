@@ -48,13 +48,13 @@ for $x in fn:doc()
           <PublicationList>
             <first-publication> 
             {for $article in $search-result 
-               let $min := min($search-result//Article/ArticleDate/Year)
-             return $article//Article/ArticleDate[Year=$min]/Year/text()}
+               let $min := min($search-result//Article//PubDate/Year)
+             return $article//Article//PubDate[Year=$min]/Year/text()}
             </first-publication>
             <last-publication>
               {for $article in $search-result 
-                 let $max := max($search-result//Article/ArticleDate/Year)
-               return $article//Article/ArticleDate[Year=$max]/Year/text()}
+               let $max := max($search-result//Article//PubDate/Year)
+             return $article//Article//PubDate[Year=$max]/Year/text()}
             </last-publication>
           {for $article in $search-result
           return
@@ -67,7 +67,7 @@ for $x in fn:doc()
                 return $journalTitle//Article/Journal/Title/data()}
               </JournalTitle>
               <Year>{for $year in $article
-                return $year//Article/ArticleDate/Year/data()}
+                return $year//Article//PubDate/Year/data()}
               </Year>
               <Authors>
               {for $auth in $article
